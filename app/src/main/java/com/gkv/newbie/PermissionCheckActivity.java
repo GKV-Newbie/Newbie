@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 
 import com.gkv.newbie.app.auth.LoginActivity;
-import com.gkv.newbie.app.home.ProcedureGroupActivity;
 
 public class PermissionCheckActivity extends AppCompatActivity {
 

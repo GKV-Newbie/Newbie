@@ -15,22 +15,4 @@
         <item name="android:autoSizeTextType">uniform</item>
     </style>
 
-    <!--
-
-<TextView
-                android:id="@+id/description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autoSizeMaxTextSize="20sp"
-                android:autoSizeMinTextSize="12sp"
-                android:autoSizeStepGranularity="2sp"
-                android:autoSizeTextType="uniform"
-                android:textColor="#000"
-                android:maxLines="10"
-                android:padding="5dp"
-                android:text='Click on "Transfer'
-                android:textSize="10pt" />
-
-        -->
-
 </resources>

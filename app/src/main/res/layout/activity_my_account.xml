@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".app.home.sections.MyAccountActivity"
+    android:padding="10dp">
+
+    <com.gkv.newbie.ui.textview.StylishText
+        style="@style/SimpleText"
+        android:text="Name"/>
+
+    <com.gkv.newbie.ui.textview.GradientTitle
+        android:id="@+id/name"
+        style="@style/SimpleTitle"
+        android:text="Name"/>
+
+    <com.gkv.newbie.ui.textview.StylishText
+        style="@style/SimpleText"
+        android:text="Email"/>
+
+    <com.gkv.newbie.ui.textview.GradientTitle
+        android:id="@+id/email"
+        style="@style/SimpleTitle"
+        android:text="Email"/>
+
+    <com.gkv.newbie.ui.textview.StylishText
+        style="@style/SimpleText"
+        android:text="Phone Number"/>
+
+    <com.gkv.newbie.ui.textview.GradientTitle
+        android:id="@+id/phoneNumber"
+        style="@style/SimpleTitle"
+        android:text="Phone Number"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <com.gkv.newbie.ui.button.StylishButton
+            android:id="@+id/signoutButton"
+            android:text="Sign-Out"
+            style="@style/BlueButton"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

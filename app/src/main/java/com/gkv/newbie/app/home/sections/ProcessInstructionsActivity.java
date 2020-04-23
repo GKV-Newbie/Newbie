@@ -1,4 +1,4 @@
-package com.gkv.newbie.app.home;
+package com.gkv.newbie.app.home.sections;
 
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
@@ -8,7 +8,6 @@ import butterknife.OnClick;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.PixelFormat;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
@@ -20,8 +19,8 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.gkv.newbie.app.home.BaseNavigationActivity;
 import com.google.gson.Gson;
 import com.gkv.newbie.R;
 import com.gkv.newbie.model.Action;
@@ -32,7 +31,7 @@ import com.gkv.newbie.modelmanager.ProcessManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ProcessInstructionsActivity extends AppCompatActivity {
+public class ProcessInstructionsActivity extends BaseNavigationActivity {
 
     public static final String EXTRA_PROCESS_ENCODED="EXTRA_PROCESS_ENCODED";
 
@@ -72,7 +71,7 @@ public class ProcessInstructionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_process_instructions);
         ButterKnife.bind(this);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
         ButterKnife.setDebug(true);
         try {
             init();

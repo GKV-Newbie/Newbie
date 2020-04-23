@@ -6,11 +6,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#fff"
-    tools:context=".app.home.ProcessInstructionsActivity">
+    tools:context=".app.home.sections.ProcessInstructionsActivity">
 
     <com.gkv.newbie.ui.textview.GradientTitle
         android:id="@+id/title"
-        style="@style/ResizeGradientTitle"/>
+        style="@style/ResizeGradientTitle"
+        android:textColor="#000"
+        android:background="@android:color/transparent"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -68,7 +70,9 @@
             <com.gkv.newbie.ui.textview.StylishText
                 android:id="@+id/description"
                 android:text='Click on "Transfer'
-                style="@style/ResizeText" />
+                style="@style/ResizeText"
+                android:textColor="#555"
+                android:padding="10dp"/>
 
         </RelativeLayout>
 
