@@ -1,47 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/mainOverlay"
         android:background="@android:drawable/picture_frame"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/title_bg"
-            android:padding="10dp">
-
-            <TextView
-                android:id="@+id/overlayTitle"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.85"
-                android:autoSizeMaxTextSize="16pt"
-                android:autoSizeMinTextSize="10pt"
-                android:autoSizeStepGranularity="2sp"
-                android:autoSizeTextType="uniform"
-                android:maxLines="1"
-                android:maxLength="30"
-                android:text="Step 2 : Zelle"
-                android:textColor="#fff"
-                android:textStyle="bold"
-                android:textSize="16pt"
-                android:ellipsize="end"/>
-
+            android:background="@drawable/title_background">
             <TextView
                 android:id="@+id/overlayClose"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="0.1"
-                android:drawableRight="@android:drawable/ic_menu_close_clear_cancel" />
-
-        </LinearLayout>
+                android:drawableRight="@android:drawable/ic_menu_close_clear_cancel"
+                android:layout_alignParentRight="true"
+                android:padding="5dp"/>
+            <com.gkv.newbie.ui.textview.GradientTitle
+                android:id="@+id/overlayTitle"
+                style="@style/ResizeGradientTitle"
+                android:maxLength="30"
+                android:background="@android:color/transparent"
+                android:layout_toLeftOf="@id/overlayClose"/>
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,25 +37,16 @@
 
             android:orientation="vertical">
 
-            <TextView
+            <com.gkv.newbie.ui.textview.StylishText
                 android:id="@+id/overlayDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autoSizeMaxTextSize="10pt"
-                android:autoSizeMinTextSize="8pt"
-                android:autoSizeStepGranularity="2sp"
-                android:autoSizeTextType="uniform"
-                android:textColor="#000"
-                android:maxLines="3"
-                android:padding="5dp"
-                android:text='Click on "Transfer'
-                android:textSize="10pt"
-                android:ellipsize="end"/>
+                android:text="A\nB\nC"
+                style="@style/ResizeText"
+                android:layout_height="90dp"
+                android:maxLines="4"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp">
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -78,12 +56,7 @@
 
                     <ImageButton
                         android:id="@+id/overlayGoBack"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
-                        android:background="@android:color/transparent"
-                        android:scaleType="fitCenter"
-                        android:layout_marginLeft="5dp"
+                        style="@style/OverlayImageButton"
                         android:src="@drawable/back" />
                 </LinearLayout>
 
@@ -95,11 +68,7 @@
 
                     <ImageButton
                         android:id="@+id/overlayFullView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
-                        android:background="@android:color/transparent"
-                        android:scaleType="fitXY"
+                        style="@style/OverlayImageButton"
                         android:src="@drawable/launch" />
                 </LinearLayout>
 
@@ -111,12 +80,7 @@
 
                     <ImageButton
                         android:id="@+id/overlayNextButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
-                        android:background="@android:color/transparent"
-                        android:scaleType="fitCenter"
-                        android:layout_marginRight="5dp"
+                        style="@style/OverlayImageButton"
                         android:src="@drawable/forward" />
                 </LinearLayout>
             </LinearLayout>

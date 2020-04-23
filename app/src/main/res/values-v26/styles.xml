@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ResizeGradientTitle" parent="@style/GradientTitle">
+        <item name="android:autoSizeMaxTextSize">30sp</item>
+        <item name="android:autoSizeMinTextSize">20sp</item>
+        <item name="android:autoSizeStepGranularity">2sp</item>
+        <item name="android:autoSizeTextType">uniform</item>
+    </style>
+
+    <style name="ResizeText" parent="@style/SimpleText">
+        <item name="android:autoSizeMaxTextSize">20sp</item>
+        <item name="android:autoSizeMinTextSize">16sp</item>
+        <item name="android:autoSizeStepGranularity">2sp</item>
+        <item name="android:autoSizeTextType">uniform</item>
+    </style>
+
+    <!--
+
+<TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoSizeMaxTextSize="20sp"
+                android:autoSizeMinTextSize="12sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
+                android:textColor="#000"
+                android:maxLines="10"
+                android:padding="5dp"
+                android:text='Click on "Transfer'
+                android:textSize="10pt" />
+
+        -->
+
+</resources>

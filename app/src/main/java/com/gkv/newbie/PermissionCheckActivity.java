@@ -9,7 +9,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 
-import com.gkv.newbie.app.ProcedureGroupActivity;
+import com.gkv.newbie.app.auth.LoginActivity;
+import com.gkv.newbie.app.home.ProcedureGroupActivity;
 
 public class PermissionCheckActivity extends AppCompatActivity {
 
@@ -18,7 +19,7 @@ public class PermissionCheckActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_permission_check);
+        //setContentView(R.layout.activity_permission_check);
         requestOverlayPermission();
     }
 
@@ -32,7 +33,8 @@ public class PermissionCheckActivity extends AppCompatActivity {
     }
 
     private void goAhead() {
-        startActivity(new Intent(this, ProcedureGroupActivity.class));
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
     }
 
     @Override

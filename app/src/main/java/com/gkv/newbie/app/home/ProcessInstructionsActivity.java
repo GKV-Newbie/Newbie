@@ -1,4 +1,4 @@
-package com.gkv.newbie.app;
+package com.gkv.newbie.app.home;
 
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.gkv.newbie.R;
@@ -125,10 +126,6 @@ public class ProcessInstructionsActivity extends AppCompatActivity {
             }
         };
         nextButton.setOnClickListener(overlayActionClicked);
-        title.setTypeface(Typeface.createFromAsset(getAssets(),
-                "kellyslab.ttf"));
-        description.setTypeface(Typeface.createFromAsset(getAssets(),
-                "ralewaym.ttf"));
     }
 
     private void dispatchAction(Action action){
@@ -263,17 +260,12 @@ public class ProcessInstructionsActivity extends AppCompatActivity {
         overlayNextButton = mTestView.findViewById(R.id.overlayNextButton);
         overlayBackButton = mTestView.findViewById(R.id.overlayGoBack);
 
-        overlayTitle.setTypeface(Typeface.createFromAsset(getAssets(),
-                "kellyslab.ttf"));
-        overlayDescription.setTypeface(Typeface.createFromAsset(getAssets(),
-                "ralewaym.ttf"));
-
         windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
 
         final WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(
                 //WindowManager.LayoutParams.FIRST_SUB_WINDOW
                 700,
-                475,
+                WindowManager.LayoutParams.WRAP_CONTENT,
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                 PixelFormat.TRANSLUCENT
@@ -287,28 +279,31 @@ public class ProcessInstructionsActivity extends AppCompatActivity {
 
 
 
-        overlayDescription.post(new Runnable() {
-            @Override
-            public void run() {
-                final String temp = overlayDescription.getText().toString();
-                overlayDescription.setText("A\nB\nC");
-                overlayDescription.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        overlayDescription.setMinHeight(overlayDescription.getMeasuredHeight());
-                        overlayDescription.setText(temp);
-                        mTestView.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                mTestView.setMinimumWidth(mTestView.getMeasuredWidth());
-                                mTestView.setMinimumHeight(mTestView.getMeasuredHeight());
-                                hideOverlay();
-                            }
-                        });
-                    }
-                });
-            }
-        });
+//        overlayDescription.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                final String temp = overlayDescription.getText().toString();
+//                Toast.makeText(ProcessInstructionsActivity.this,String.valueOf(overlayDescription.getMeasuredHeight()),Toast.LENGTH_LONG).show();
+//                overlayDescription.setText("A\nB\nC");
+//                overlayDescription.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        overlayDescription.setMinHeight(overlayDescription.getMeasuredHeight());
+//                        Toast.makeText(ProcessInstructionsActivity.this,String.valueOf(overlayDescription.getMeasuredHeight()),Toast.LENGTH_LONG).show();
+//                        overlayDescription.setText(temp);
+//                        mTestView.post(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                mTestView.setMinimumWidth(mTestView.getMeasuredWidth());
+//                                mTestView.setMinimumHeight(mTestView.getMeasuredHeight());
+//                                Toast.makeText(ProcessInstructionsActivity.this,String.valueOf(mTestView.getMeasuredHeight()),Toast.LENGTH_LONG).show();
+//                                //hideOverlay();
+//                            }
+//                        });
+//                    }
+//                });
+//            }
+//        });
 
         mTestView.findViewById(R.id.overlayClose).setOnClickListener(new View.OnClickListener() {
             @Override

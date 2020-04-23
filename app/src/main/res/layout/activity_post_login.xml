@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".app.auth.PostLoginActivity">
+
+    <com.gkv.newbie.ui.textview.GradientTitle
+        android:id="@+id/title"
+        style="@style/GradientTitle"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+        <com.gkv.newbie.ui.textview.StylishText
+            android:id="@+id/centerTitle"
+            android:text="Continuing as "
+            style="@style/CenterTitle"
+            />
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="0"
+            style="?android:attr/progressBarStyleHorizontal"
+            />
+        <com.gkv.newbie.ui.button.StylishButton
+            android:id="@+id/signoutButton"
+            android:text="Sign-Out"
+            style="@style/BlueButton"
+            />
+    </LinearLayout>
+</LinearLayout>

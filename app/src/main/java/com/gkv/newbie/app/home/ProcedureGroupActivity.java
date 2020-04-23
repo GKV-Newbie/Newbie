@@ -1,4 +1,4 @@
-package com.gkv.newbie.app;
+package com.gkv.newbie.app.home;
 
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
@@ -29,8 +29,6 @@ public class ProcedureGroupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_procedure_group);
         ButterKnife.bind(this);
         getSupportActionBar().hide();
-        title.setTypeface(Typeface.createFromAsset(getAssets(),
-                "kellyslab.ttf"));
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient(){
             @Override
