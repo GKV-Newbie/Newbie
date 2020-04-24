@@ -8,20 +8,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:692838962543:android:390d1004968aacc05b849a",
+        "mobilesdk_app_id": "1:692838962543:android:a56ea30334da446f5b849a",
         "android_client_info": {
           "package_name": "com.gkv.newbie"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "692838962543-noasb2mvid5svejnb0s71pgi7sqtmk02.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.gkv.newbie",
-            "certificate_hash": "c69ec8d18de1f5eb7bca682dd461a2704dc9827a"
-          }
-        },
         {
           "client_id": "692838962543-h8ctsun2mkkbgrk2rjg54nhi1o9panc5.apps.googleusercontent.com",
           "client_type": 3
