@@ -12,8 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".app.home.sections.MyAccountActivity"></activity>
-        <activity android:name=".app.home.BaseNavigationActivity"
+        <activity android:name=".app.home.sections.MyProcedureGroupActivity"></activity>
+        <activity android:name=".app.home.sections.MyAccountActivity" />
+        <activity
+            android:name=".app.home.BaseNavigationActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".app.auth.PostLoginActivity" />
         <activity android:name=".app.auth.LoginActivity" />
@@ -37,9 +39,9 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.REORDER_TASKS" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
 
 </manifest>

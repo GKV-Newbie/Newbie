@@ -28,6 +28,11 @@
             android:drawableLeft="@drawable/googleg_standard_color_18"
             style="@style/BlueButton"
             />
+        <com.gkv.newbie.ui.button.StylishButton
+            android:id="@+id/anonymousButton"
+            android:text="Continue as Guest"
+            style="@style/BlueButton"
+            />
     </LinearLayout>
 
 </LinearLayout>

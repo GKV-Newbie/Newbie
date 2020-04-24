@@ -57,7 +57,9 @@ public class MyAccountActivity extends BaseNavigationActivity {
 
         email.setText(user.getEmail());
         name.setText(user.getDisplayName());
-        phoneNumber.setText(user.getPhoneNumber());
+
+        if(user.getPhoneNumber().equals("")==false)
+            phoneNumber.setText(user.getPhoneNumber());
 
     }
 

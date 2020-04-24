@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.gkv.newbie.R;
+import com.gkv.newbie.app.home.sections.ProcedureGroupActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -111,6 +112,11 @@ public class LoginActivity extends AppCompatActivity {
     public void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+    @OnClick(R.id.anonymousButton)
+    public void anonymous() {
+        startActivity(new Intent(this, ProcedureGroupActivity.class));
+        finish();
     }
 
 }
