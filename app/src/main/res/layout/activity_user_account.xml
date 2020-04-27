@@ -5,8 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".app.home.sections.MyAccountActivity"
+    tools:context=".app.home.sections.UserAccountActivity"
+    android:background="#fff"
     android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:src="@drawable/deadpool"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FF000000"/>
+    </LinearLayout>
 
     <com.gkv.newbie.ui.textview.StylishText
         style="@style/SimpleText"
@@ -22,15 +37,6 @@
         android:text="Email"/>
 
     <com.gkv.newbie.ui.textview.GradientTitle
-        android:id="@+id/email"
-        style="@style/SimpleTitle"
-        android:text="Email"/>
-
-    <com.gkv.newbie.ui.textview.StylishText
-        style="@style/SimpleText"
-        android:text="Phone Number"/>
-
-    <com.gkv.newbie.ui.textview.GradientTitle
         android:id="@+id/phoneNumber"
         style="@style/SimpleTitle"
         android:text="N/A"/>
@@ -38,11 +44,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:gravity="center">
 
         <com.gkv.newbie.ui.button.StylishButton
             android:id="@+id/signoutButton"
             android:text="Sign-Out"
+            android:drawableLeft="@drawable/logout"
+            style="@style/BlueButton"
+            />
+
+        <com.gkv.newbie.ui.button.StylishButton
+            android:id="@+id/followButton"
+            android:text="Favourite User"
+            android:drawableLeft="@drawable/star_white"
+            style="@style/BlueButton"
+            />
+
+        <com.gkv.newbie.ui.button.StylishButton
+            android:id="@+id/proceduresButton"
+            android:text="View Procedures"
+            android:drawableLeft="@drawable/text_file"
             style="@style/BlueButton"
             />
 

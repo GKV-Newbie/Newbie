@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.gkv.newbie.R;
 import com.gkv.newbie.app.home.sections.ProcedureGroupActivity;
+import com.gkv.newbie.utils.auth.UserManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -54,6 +55,11 @@ public class PostLoginActivity extends AppCompatActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
+        goAhead();
+
+    }
+
+    private void goAhead() {
         final Handler handler = new Handler();
 
         handler.post(new Runnable() {
@@ -68,7 +74,6 @@ public class PostLoginActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     private void timerOut() {
@@ -79,6 +84,9 @@ public class PostLoginActivity extends AppCompatActivity {
     @OnClick(R.id.signoutButton)
     public void signOut() {
         // Firebase sign out
+        i=1000;
+        UserManager.getInstance().setAuthToken("");
+
         FirebaseAuth.getInstance().signOut();
 
         // Google sign out
@@ -86,7 +94,6 @@ public class PostLoginActivity extends AppCompatActivity {
                 new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        i=1000;
                         startActivity(new Intent(PostLoginActivity.this,LoginActivity.class));
                         finish();
                     }

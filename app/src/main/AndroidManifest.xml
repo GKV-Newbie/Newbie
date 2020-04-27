@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".app.home.sections.MyProcedureGroupActivity"></activity>
-        <activity android:name=".app.home.sections.MyAccountActivity" />
+        <activity android:name=".app.home.sections.UserAccountActivity" />
         <activity
             android:name=".app.home.BaseNavigationActivity"
             android:theme="@style/AppTheme.NoActionBar" />

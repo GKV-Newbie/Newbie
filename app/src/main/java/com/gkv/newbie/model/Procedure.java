@@ -5,12 +5,12 @@ import java.io.Serializable;
 public class Procedure implements Serializable {
 
     String name;
-
-    String description;
-
-    Process process;
-
-    String link;
+    Procedure parent;
+    User owner;
+    String shareType;
+    String procedureType;
+    Process processObj;
+    String process;
 
     public Procedure() {
     }
@@ -23,27 +23,51 @@ public class Procedure implements Serializable {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public Procedure getParent() {
+        return parent;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setParent(Procedure parent) {
+        this.parent = parent;
     }
 
-    public Process getProcess() {
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public String getShareType() {
+        return shareType;
+    }
+
+    public void setShareType(String shareType) {
+        this.shareType = shareType;
+    }
+
+    public String getProcedureType() {
+        return procedureType;
+    }
+
+    public void setProcedureType(String procedureType) {
+        this.procedureType = procedureType;
+    }
+
+    public Process getProcessObj() {
+        return processObj;
+    }
+
+    public void setProcessObj(Process processObj) {
+        this.processObj = processObj;
+    }
+
+    public String getProcess() {
         return process;
     }
 
-    public void setProcess(Process process) {
+    public void setProcess(String process) {
         this.process = process;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
     }
 }

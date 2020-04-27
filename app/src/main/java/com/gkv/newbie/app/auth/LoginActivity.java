@@ -8,9 +8,13 @@ import butterknife.OnClick;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.gkv.newbie.R;
 import com.gkv.newbie.app.home.sections.ProcedureGroupActivity;
+import com.gkv.newbie.utils.auth.UserManager;
+import com.gkv.newbie.utils.internet.ResponseHandler;
+import com.gkv.newbie.utils.internet.Server;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -24,6 +28,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -104,8 +111,33 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUser(FirebaseUser user) {
         if(user==null)
             return;
-        startActivity(new Intent(this,PostLoginActivity.class));
-        finish();
+
+        Server.getInstance().registerUser(this,
+                user.getEmail(),
+                user.getUid(),
+                user.getDisplayName(),
+                user.getPhotoUrl().toString(),
+                new ResponseHandler() {
+                    @Override
+                    public void onCallback(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            UserManager.getInstance().setAuthToken(jsonObject.getString("accessToken"));
+                            startActivity(new Intent(LoginActivity.this,PostLoginActivity.class));
+                            finish();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(LoginActivity.this,e.toString(),Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new ResponseHandler() {
+                    @Override
+                    public void onCallback(String error) {
+                        Toast.makeText(LoginActivity.this,error,Toast.LENGTH_LONG).show();
+                    }
+                });
+
     }
 
     @OnClick(R.id.signinButton)

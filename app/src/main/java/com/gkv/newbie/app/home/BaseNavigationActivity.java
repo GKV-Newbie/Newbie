@@ -17,7 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.gkv.newbie.R;
-import com.gkv.newbie.app.home.sections.MyAccountActivity;
+import com.gkv.newbie.app.home.sections.UserAccountActivity;
 import com.gkv.newbie.app.home.sections.ProcedureGroupActivity;
 import com.google.android.material.navigation.NavigationView;
 
@@ -59,7 +59,7 @@ public class BaseNavigationActivity extends AppCompatActivity {
                 Class<?> goTo = ProcedureGroupActivity.class;
                 switch(item.getItemId()){
                     case R.id.nav_procedures : goTo = ProcedureGroupActivity.class; break;
-                    case R.id.nav_my_account : goTo = MyAccountActivity.class; break;
+                    case R.id.nav_my_account : goTo = UserAccountActivity.class; break;
                 }
                 startActivity(new Intent(BaseNavigationActivity.this,goTo));
                 finish();
