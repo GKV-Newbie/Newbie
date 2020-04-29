@@ -53,16 +53,16 @@
         android:gravity="center">
 
         <com.gkv.newbie.ui.button.StylishButton
-            android:id="@+id/signoutButton"
-            android:text="Sign-Out"
-            android:drawableLeft="@drawable/icon_logout"
+            android:id="@+id/updateButton"
+            android:text="Update"
+            android:drawableLeft="@drawable/pencil"
             style="@style/BlueButton"
             />
 
         <com.gkv.newbie.ui.button.StylishButton
-            android:id="@+id/updateButton"
-            android:text="Update"
-            android:drawableLeft="@drawable/pencil"
+            android:id="@+id/signoutButton"
+            android:text="Sign-Out"
+            android:drawableLeft="@drawable/icon_logout"
             style="@style/BlueButton"
             />
 

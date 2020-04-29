@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gkv.newbie.R;
 import com.gkv.newbie.app.home.BaseNavigationActivity;
@@ -79,8 +80,11 @@ public class ProcedureProcessActivity extends BaseNavigationActivity {
                 },
                 new ResponseHandler() {
                     @Override
-                    public void onCallback(String response) {
-                        System.out.println(response);
+                    public void onCallback(String error) {
+                        System.out.println(error);
+                        name.setText(procedure.getFormattedName());
+                        owner.setText(procedure.getOwner().getEmail());
+                        ownerControls.setVisibility(View.GONE);
                     }
                 }
         );
@@ -90,8 +94,13 @@ public class ProcedureProcessActivity extends BaseNavigationActivity {
     @OnClick(R.id.openProcessButton)
     public void openProcess(){
         try {
+            Process process = POJO.getInstance().fromJson(procedure.getProcess(), Process.class);
+            if(process.getHeadStepTitle().length()==0){
+                Toast.makeText(this,"Unable to load process at the moment. Please try again.",Toast.LENGTH_LONG).show();
+                return;
+            }
             ProcessHolder.getInstance().setProcess(
-                    POJO.getInstance().fromJson(procedure.getProcess(), Process.class)
+                    process
             );
             startActivity(new Intent(this, ProcessInstructionsActivity.class));
         }catch (Exception e){

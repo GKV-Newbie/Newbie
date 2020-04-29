@@ -82,6 +82,11 @@ public class CreateActionActivity extends BaseNavigationActivity {
         try {
             refreshAction();
 
+            if(action.getName().length()==0){
+                Toast.makeText(this,"Name cant be empty",Toast.LENGTH_LONG).show();
+                return;
+            }
+
             if(process.hasAction(action.getName())){
                 if(process.getActionByTitle(action.getName()).getStepTitle().equals(action.getStepTitle()) == false){
                     Toast.makeText(this,"Action exists with that name",Toast.LENGTH_LONG).show();

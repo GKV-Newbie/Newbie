@@ -120,6 +120,10 @@ public class CreateStepActivity extends BaseNavigationActivity {
     @OnClick(R.id.saveButton)
     public void save(){
         refreshStep();
+        if(step.getTitle().length()==0){
+            Toast.makeText(this,"Title cant be empty",Toast.LENGTH_LONG).show();
+            return;
+        }
         process.putStep(step);
         finish();
     }

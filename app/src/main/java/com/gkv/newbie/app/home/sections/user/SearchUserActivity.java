@@ -9,6 +9,7 @@ import butterknife.OnClick;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.gkv.newbie.R;
 import com.gkv.newbie.app.home.BaseNavigationActivity;
@@ -37,8 +38,13 @@ public class SearchUserActivity extends BaseNavigationActivity {
 
     @OnClick(R.id.searchButton)
     public void searchUser(){
+        String email = textInputLayout.getEditText().getText().toString().trim().toLowerCase();
+        if(email.length()==0){
+            Toast.makeText(this,"Email cant be empty",Toast.LENGTH_LONG).show();
+            return;
+        }
         Intent i = new Intent(this,ViewUserActivity.class);
-        i.putExtra(ViewUserActivity.USER_EMAIL,textInputLayout.getEditText().getText().toString().trim().toLowerCase());
+        i.putExtra(ViewUserActivity.USER_EMAIL,email);
         startActivity(i);
     }
 }

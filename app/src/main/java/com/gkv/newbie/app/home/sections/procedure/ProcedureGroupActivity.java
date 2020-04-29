@@ -122,7 +122,7 @@ public class ProcedureGroupActivity extends BaseNavigationActivity {
     protected void onStart() {
         super.onStart();
         try {
-            listProcedures(showShared);
+            loadList();
         }catch (Exception e){
             
         }
@@ -138,6 +138,7 @@ public class ProcedureGroupActivity extends BaseNavigationActivity {
     }
 
     private void listUserProcedures(String userEmail) {
+        ownerControls.setVisibility(View.GONE);
         Server.getInstance().listUserProcedures(this,userEmail,successHandler,failureHandler);
     }
 

@@ -33,23 +33,27 @@
         android:text="Name"/>
 
     <LinearLayout
-        android:id="@+id/ownerControls"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center">
 
-        <com.gkv.newbie.ui.button.StylishButton
-            android:id="@+id/updateProcedureButton"
-            android:layout_width="60dp"
-            android:drawableLeft="@drawable/pencil"
-            style="@style/BlueButton"/>
+        <LinearLayout
+            android:id="@+id/ownerControls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.gkv.newbie.ui.button.StylishButton
+                android:id="@+id/updateProcedureButton"
+                android:layout_width="60dp"
+                android:drawableLeft="@drawable/pencil"
+                style="@style/BlueButton"/>
 
-        <com.gkv.newbie.ui.button.StylishButton
-            android:id="@+id/shareProcedureButton"
-            android:layout_width="60dp"
-            android:drawableLeft="@drawable/share"
-            style="@style/BlueButton"/>
+            <com.gkv.newbie.ui.button.StylishButton
+                android:id="@+id/shareProcedureButton"
+                android:layout_width="60dp"
+                android:drawableLeft="@drawable/share"
+                style="@style/BlueButton"/>
+        </LinearLayout>
 
         <com.gkv.newbie.ui.button.StylishButton
             android:id="@+id/openProcessButton"

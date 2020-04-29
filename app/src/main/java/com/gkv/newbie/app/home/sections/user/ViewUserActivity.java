@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.gkv.newbie.R;
 import com.gkv.newbie.app.auth.LoginActivity;
 import com.gkv.newbie.app.home.BaseNavigationActivity;
+import com.gkv.newbie.app.home.sections.procedure.ProcedureGroupActivity;
 import com.gkv.newbie.model.User;
 import com.gkv.newbie.utils.auth.UserManager;
 import com.gkv.newbie.utils.locallists.FavouriteManager;
@@ -208,5 +209,12 @@ public class ViewUserActivity extends BaseNavigationActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @OnClick(R.id.proceduresButton)
+    public void procedures(){
+        Intent i = new Intent(this, ProcedureGroupActivity.class);
+        i.putExtra(ProcedureGroupActivity.USER_EMAIL,user.getEmail());
+        startActivity(i);
     }
 }
