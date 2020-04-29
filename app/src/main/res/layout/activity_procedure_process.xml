@@ -7,12 +7,30 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#fff"
-    tools:context=".app.home.sections.procedure.ProcedureGroupActivity">
+    tools:context=".app.home.sections.procedure.ProcedureProcessActivity">
 
     <com.gkv.newbie.ui.textview.GradientTitle
         android:id="@+id/procedureTitle"
         style="@style/SimpleTitle"
-        android:text="Procedures Group"/>
+        android:text="Procedures Process"/>
+
+    <com.gkv.newbie.ui.textview.StylishText
+        style="@style/SimpleText"
+        android:text="Name"/>
+
+    <com.gkv.newbie.ui.textview.GradientTitle
+        android:id="@+id/name"
+        style="@style/SimpleTitle"
+        android:text="Name"/>
+
+    <com.gkv.newbie.ui.textview.StylishText
+        style="@style/SimpleText"
+        android:text="Owner"/>
+
+    <com.gkv.newbie.ui.textview.GradientTitle
+        android:id="@+id/owner"
+        style="@style/SimpleTitle"
+        android:text="Name"/>
 
     <LinearLayout
         android:id="@+id/ownerControls"
@@ -34,16 +52,13 @@
             style="@style/BlueButton"/>
 
         <com.gkv.newbie.ui.button.StylishButton
-            android:id="@+id/createProcedureButton"
+            android:id="@+id/openProcessButton"
             android:layout_width="60dp"
-            android:drawableLeft="@drawable/text_file"
+            android:drawableLeft="@drawable/outline"
             style="@style/BlueButton"/>
 
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+
 
 </LinearLayout>

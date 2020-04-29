@@ -33,6 +33,7 @@
         <com.gkv.newbie.ui.button.StylishButton
             android:id="@+id/signoutButton"
             android:text="Sign-Out"
+            android:drawableLeft="@drawable/icon_logout"
             style="@style/BlueButton"
             />
     </LinearLayout>

@@ -1,34 +1,71 @@
 package com.gkv.newbie.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Procedure implements Serializable {
 
+    String _id;
     String name;
-    Procedure parent;
+    String parent;
+    Procedure parentProcedure;
+    ArrayList<Procedure> children;
     User owner;
-    String shareType;
-    String procedureType;
-    Process processObj;
-    String process;
+    ArrayList<User> sharedAccess;
+    String shareType="public";
+    String procedureType="group";
+    String process="{}";
 
     public Procedure() {
+        children = new ArrayList<>();
+    }
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
     public String getName() {
         return name;
     }
 
+    public String getFormattedName() {
+        return (getShareType().equals("public")?"":("\uD83D\uDD12"+" "))+name;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public Procedure getParent() {
+    public String getParent() {
         return parent;
     }
 
-    public void setParent(Procedure parent) {
+    public void setParent(String parent) {
         this.parent = parent;
+    }
+
+    public Procedure getParentProcedure() {
+        return parentProcedure;
+    }
+
+    public void setParentProcedure(Procedure parentProcedure) {
+        this.parentProcedure = parentProcedure;
+    }
+
+    public ArrayList<Procedure> getChildren() {
+        return children;
+    }
+
+    public void setChildren(ArrayList<Procedure> children) {
+        this.children = children;
+    }
+
+    public void addChild(Procedure child){
+        this.children.add(child);
     }
 
     public User getOwner() {
@@ -37,6 +74,14 @@ public class Procedure implements Serializable {
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+    public ArrayList<User> getSharedAccess() {
+        return sharedAccess;
+    }
+
+    public void setSharedAccess(ArrayList<User> sharedAccess) {
+        this.sharedAccess = sharedAccess;
     }
 
     public String getShareType() {
@@ -55,19 +100,16 @@ public class Procedure implements Serializable {
         this.procedureType = procedureType;
     }
 
-    public Process getProcessObj() {
-        return processObj;
-    }
-
-    public void setProcessObj(Process processObj) {
-        this.processObj = processObj;
-    }
-
     public String getProcess() {
         return process;
     }
 
     public void setProcess(String process) {
         this.process = process;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

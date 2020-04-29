@@ -8,7 +8,7 @@ public class UserManager {
 
     private String AuthToken;
 
-    private User user;
+    private String email;
 
     private UserManager(){
 
@@ -28,12 +28,11 @@ public class UserManager {
         AuthToken = authToken;
     }
 
-    public User getUser() {
-        return user;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setEmail(String email) {
+        this.email = email;
     }
-
 }

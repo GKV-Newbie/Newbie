@@ -30,7 +30,7 @@
             />
         <com.gkv.newbie.ui.button.StylishButton
             android:id="@+id/anonymousButton"
-            android:text="Continue as Guest"
+            android:text="Cheat Login"
             style="@style/BlueButton"
             />
     </LinearLayout>

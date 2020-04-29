@@ -14,7 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.gkv.newbie.R;
-import com.gkv.newbie.app.home.sections.ProcedureGroupActivity;
+import com.gkv.newbie.app.home.sections.user.ViewUserActivity;
 import com.gkv.newbie.utils.auth.UserManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -77,7 +77,7 @@ public class PostLoginActivity extends AppCompatActivity {
     }
 
     private void timerOut() {
-        startActivity(new Intent(this, ProcedureGroupActivity.class));
+        startActivity(new Intent(this, ViewUserActivity.class));
         finish();
     }
 

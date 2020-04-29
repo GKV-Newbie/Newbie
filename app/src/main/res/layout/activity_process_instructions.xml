@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#fff"
-    tools:context=".app.home.sections.ProcessInstructionsActivity">
+    tools:context=".app.home.sections.process.ProcessInstructionsActivity">
 
     <com.gkv.newbie.ui.textview.GradientTitle
         android:id="@+id/title"
@@ -39,7 +39,7 @@
                     <ImageButton
                         android:id="@+id/goBack"
                         style="@style/RegularImageButton"
-                        android:src="@drawable/back" />
+                        android:src="@drawable/process_back" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -63,7 +63,7 @@
                     <ImageButton
                         android:id="@+id/nextButton"
                         style="@style/RegularImageButton"
-                        android:src="@drawable/forward" />
+                        android:src="@drawable/process_forward" />
                 </LinearLayout>
             </LinearLayout>
 

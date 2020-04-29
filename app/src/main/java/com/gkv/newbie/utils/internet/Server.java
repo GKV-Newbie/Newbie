@@ -4,9 +4,14 @@ import android.app.Activity;
 
 import com.gkv.newbie.utils.auth.UserManager;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
 import java.io.IOException;
 
 import okhttp3.HttpUrl;
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -20,6 +25,8 @@ public class Server {
     private OkHttpClient client ;
 
     private Object BASE_URL = "http://newbie-rest.herokuapp.com";
+
+    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     private Server(){
         this.client = new OkHttpClient();
@@ -53,16 +60,18 @@ public class Server {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                System.out.println(request.url().toString());
                 try (Response response = client.newCall(request).execute()) {
                     if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
                     String responseString = response.body().string();
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            System.out.println(responseString);
                             successHandler.onCallback(responseString);
                         }
                     });
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                     activity.runOnUiThread(new Runnable() {
                         @Override
@@ -85,16 +94,22 @@ public class Server {
             ResponseHandler failureHandler
     ){
 
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("email", email)
-                .addFormDataPart("password", password)
-                .addFormDataPart("name", name)
-                .addFormDataPart("displayPicture", displayPicture)
-                .build();
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("email",email);
+            jsonObject.put("password", password);
+            jsonObject.put("name", name);
+            jsonObject.put("displayPicture", displayPicture);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        RequestBody requestBody = RequestBody.create(JSON,jsonObject.toString());
 
         Request request = new Request.Builder()
                 .url(BASE_URL + "/user/register")
+                .addHeader("Content-Type","application/json")
                 .post(requestBody)
                 .build();
 
@@ -109,15 +124,20 @@ public class Server {
             ResponseHandler successHandler,
             ResponseHandler failureHandler
     ){
+        JSONObject jsonObject = new JSONObject();
 
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("email", email)
-                .addFormDataPart("password", password)
-                .build();
+        try {
+            jsonObject.put("email",email);
+            jsonObject.put("password", password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        RequestBody requestBody = RequestBody.create(JSON,jsonObject.toString());
 
         Request request = new Request.Builder()
                 .url(BASE_URL + "/user/login")
+                .addHeader("Content-Type","application/json")
                 .post(requestBody)
                 .build();
 
@@ -127,23 +147,27 @@ public class Server {
 
     public void updateUser(
             Activity activity,
-            String password,
             String name,
             String displayPicture,
             ResponseHandler successHandler,
             ResponseHandler failureHandler
     ){
 
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("password", password)
-                .addFormDataPart("name", name)
-                .addFormDataPart("displayPicture", displayPicture)
-                .build();
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("name",name);
+            jsonObject.put("displayPicture", displayPicture);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        RequestBody requestBody = RequestBody.create(JSON,jsonObject.toString());
 
         Request request = new Request.Builder()
                 .url(BASE_URL + "/user/update")
                 .addHeader("Authorization","Bearer "+ getAuthToken())
+                .addHeader("Content-Type","application/json")
                 .put(requestBody)
                 .build();
 
@@ -199,18 +223,25 @@ public class Server {
             ResponseHandler failureHandler
     ){
 
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("name", name)
-                .addFormDataPart("parent", parent)
-                .addFormDataPart("shareType", shareType)
-                .addFormDataPart("procedureType", procedureType)
-                .addFormDataPart("process", process)
-                .build();
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("name",name);
+            if(parent!=null)
+            jsonObject.put("parent", parent);
+            jsonObject.put("shareType", shareType);
+            jsonObject.put("procedureType", procedureType);
+            jsonObject.put("process", process);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        RequestBody requestBody = RequestBody.create(JSON,jsonObject.toString());
 
         Request request = new Request.Builder()
                 .url(BASE_URL + "/procedure/create")
                 .addHeader("Authorization","Bearer "+ getAuthToken())
+                .addHeader("Content-Type","application/json")
                 .post(requestBody)
                 .build();
 
@@ -240,6 +271,7 @@ public class Server {
     
     public void updateProcedure(
             Activity activity,
+            String id,
             String name,
             String shareType,
             String procedureType,
@@ -248,17 +280,24 @@ public class Server {
             ResponseHandler failureHandler
     ){
 
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("name", name)
-                .addFormDataPart("shareType", shareType)
-                .addFormDataPart("procedureType", procedureType)
-                .addFormDataPart("process", process)
-                .build();
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("id",id);
+            jsonObject.put("name",name);
+            jsonObject.put("shareType", shareType);
+            jsonObject.put("procedureType", procedureType);
+            jsonObject.put("process", process);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        RequestBody requestBody = RequestBody.create(JSON,jsonObject.toString());
 
         Request request = new Request.Builder()
                 .url(BASE_URL + "/procedure/update")
                 .addHeader("Authorization","Bearer "+ getAuthToken())
+                .addHeader("Content-Type","application/json")
                 .put(requestBody)
                 .build();
 
@@ -343,15 +382,21 @@ public class Server {
             ResponseHandler failureHandler
     ){
 
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("id", id)
-                .addFormDataPart("email", email)
-                .build();
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("id",id);
+            jsonObject.put("email", email);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        RequestBody requestBody = RequestBody.create(JSON,jsonObject.toString());
 
         Request request = new Request.Builder()
                 .url(BASE_URL + "/procedure/share/give")
                 .addHeader("Authorization","Bearer "+ getAuthToken())
+                .addHeader("Content-Type","application/json")
                 .put(requestBody)
                 .build();
 
@@ -367,20 +412,46 @@ public class Server {
             ResponseHandler failureHandler
     ){
 
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("id", id)
-                .addFormDataPart("email", email)
-                .build();
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("id",id);
+            jsonObject.put("email", email);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        RequestBody requestBody = RequestBody.create(JSON,jsonObject.toString());
 
         Request request = new Request.Builder()
                 .url(BASE_URL + "/procedure/share/revoke")
                 .addHeader("Authorization","Bearer "+ getAuthToken())
+                .addHeader("Content-Type","application/json")
                 .put(requestBody)
                 .build();
 
         requestHandler(activity,request,successHandler,failureHandler);
 
+    }
+
+    public void uploadImage(
+            Activity activity,
+            String f,
+            ResponseHandler successHandler,
+            ResponseHandler failureHandler
+    ){
+        System.out.println(f);
+        RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart("image", f)
+                .build();
+        Request request = new Request.Builder()
+                .url("https://api.imgur.com/3/image")
+                .method("POST", body)
+                .addHeader("Authorization", "Client-ID 196ccd3e87194e9")
+                .build();
+
+        //10e2a0be7668fab0ee7387ccb9b2384b195b868b
+        requestHandler(activity,request,successHandler,failureHandler);
     }
 
 }

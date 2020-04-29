@@ -2,74 +2,123 @@ package com.gkv.newbie.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Set;
 
 public class Process implements Serializable {
 
-    String headStepId;
+    String headStepTitle;
 
-    HashMap<String, Step> stepMap;
+    LinkedHashMap<String, Step> stepMap;
 
-    HashMap<String, Action> actionMap;
+    LinkedHashMap<String, Action> actionMap;
 
-    HashMap<String, ArrayList<String>> stepActionMap;
+    LinkedHashMap<String, HashSet<String>> stepActionMap;
 
     public Process() {
-        stepMap = new HashMap<String, Step>();
-        actionMap = new HashMap<String, Action>();
-        stepActionMap = new HashMap<String, ArrayList<String>>();
+        stepMap = new LinkedHashMap<String, Step>();
+        actionMap = new LinkedHashMap<String, Action>();
+        stepActionMap = new LinkedHashMap<String, HashSet<String>>();
     }
 
-    public String getHeadStepId() {
-        System.out.println("getHeadStepId "+ headStepId);
-        return headStepId;
+    public String getHeadStepTitle() {
+        System.out.println("getHeadStepTitle "+ headStepTitle);
+        return headStepTitle;
     }
 
-    public void setHeadStepId(String headStepId) {
-        System.out.println("setHeadStepId "+ headStepId);
-        this.headStepId = headStepId;
+    public void setHeadStepTitle(String headStepTitle) {
+        System.out.println("setHeadStepTitle "+ headStepTitle);
+        this.headStepTitle = headStepTitle;
     }
 
-    public Step getStepById(String id){
-        System.out.println("getStepById "+ id +" > "+stepMap.get(id));
-        return stepMap.get(id);
+    public ArrayList<String> stepList(){
+        ArrayList<String> list = new ArrayList<>();
+        list.addAll(stepMap.keySet());
+        return list;
+    }
+
+    public Step getStepByTitle(String title){
+        System.out.println("getStepByTitle "+ title +" > "+stepMap.get(title));
+        return stepMap.get(title);
     }
 
     public Step putStep(Step step){
         System.out.println("putStep "+step);
-        if(stepActionMap.containsKey(step.getId()) == false){
-            stepActionMap.put(step.getId(),new ArrayList<String>());
+        if(stepActionMap.containsKey(step.getTitle()) == false){
+            stepActionMap.put(step.getTitle(),new HashSet<String>());
         }
-        return stepMap.put(step.getId(),step);
+        return stepMap.put(step.getTitle(),step);
     }
 
-    public Action getActionById(String id){
-        System.out.println("getActionById "+id+" > "+actionMap.get(id));
-        return actionMap.get(id);
+    public Action getActionByTitle(String title){
+        System.out.println("getActionByTitle "+title+" > "+actionMap.get(title));
+        return actionMap.get(title);
     }
 
     public Action putAction(Action action){
         System.out.println("putAction "+action);
-        return actionMap.put(action.getId(),action);
+        return actionMap.put(action.getName(),action);
     }
 
     public boolean putStepActionAssociation(Step step, Action action){
         System.out.println("putStepActionAssociation "+step+" "+action);
-        if(stepMap.containsKey(step.getId()) == false){
+        if(stepMap.containsKey(step.getTitle()) == false){
             putStep(step);
         }
-        if(actionMap.containsKey(action.getId()) == false){
+        if(actionMap.containsKey(action.getName()) == false){
             putAction(action);
         }
-        if(stepActionMap.containsKey(step.getId()) == false){
-            stepActionMap.put(step.getId(),new ArrayList<String>());
+        if(stepActionMap.containsKey(step.getTitle()) == false){
+            stepActionMap.put(step.getTitle(),new HashSet<String>());
         }
-        return stepActionMap.get(step.getId()).add(action.getId());
+        return stepActionMap.get(step.getTitle()).add(action.getName());
+    }
+
+    public void removeStepActionAssociation(Step step, Action action){
+        stepActionMap.get(step.getTitle()).remove(action.getName());
+        removeUnusedActions();
     }
 
     public ArrayList<String> getActionsOfStep(Step step){
-        System.out.println("getActionsOfStep "+step+" "+stepActionMap.get(step.getId()));
-        return stepActionMap.get(step.getId());
+        System.out.println("getActionsOfStep "+step+" "+stepActionMap.get(step.getTitle()));
+        ArrayList<String> list = new ArrayList<>();
+        try {
+            list.addAll(stepActionMap.get(step.getTitle()));
+        }catch (Exception e){
+
+        }
+        return list;
+    }
+
+    public boolean hasAction(String name){
+        return actionMap.containsKey(name);
+    }
+
+    public boolean hasStep(String title){
+        return stepMap.containsKey(title);
+    }
+
+    public void removeStep(Step step) {
+        stepMap.remove(step.getTitle());
+        stepActionMap.remove(step.getTitle());
+        removeUnusedActions();
+    }
+
+    private void removeUnusedActions() {
+        Collection<HashSet<String>> usedActionsFromMap = stepActionMap.values();
+        HashSet<String> usedActions = new HashSet<>();
+        for(HashSet<String> i:usedActionsFromMap){
+            for(String j:i){
+                usedActions.add(j);
+            }
+        }
+        for(String key:actionMap.keySet()){
+            if(usedActions.contains(key)==false)
+                actionMap.remove(key);
+        }
     }
 
 }

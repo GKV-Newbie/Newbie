@@ -17,9 +17,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.gkv.newbie.R;
-import com.gkv.newbie.app.home.sections.UserAccountActivity;
-import com.gkv.newbie.app.home.sections.ProcedureGroupActivity;
+import com.gkv.newbie.app.home.sections.procedure.ProcedureGroupActivity;
+import com.gkv.newbie.app.home.sections.user.FavouriteUserListActivity;
+import com.gkv.newbie.app.home.sections.user.SearchUserActivity;
+import com.gkv.newbie.app.home.sections.user.ViewUserActivity;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.HashMap;
 
 public class BaseNavigationActivity extends AppCompatActivity {
 
@@ -52,16 +56,30 @@ public class BaseNavigationActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
+        final HashMap<Integer,Class> map = new HashMap<>();
+        map.put(R.id.nav_my_account,ViewUserActivity.class);
+        map.put(R.id.nav_search_user, SearchUserActivity.class);
+        map.put(R.id.nav_favourite_user, FavouriteUserListActivity.class);
+        map.put(R.id.nav_my_procedures, ProcedureGroupActivity.class);
+        map.put(R.id.nav_shared_procedures, ProcedureGroupActivity.class);
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 System.out.println(item.getTitle());
-                Class<?> goTo = ProcedureGroupActivity.class;
-                switch(item.getItemId()){
-                    case R.id.nav_procedures : goTo = ProcedureGroupActivity.class; break;
-                    case R.id.nav_my_account : goTo = UserAccountActivity.class; break;
+
+                Intent i = new Intent(BaseNavigationActivity.this,
+                        map.containsKey(item.getItemId())?
+                                map.get(item.getItemId()):
+                                ViewUserActivity.class
+                );
+
+                if(item.getItemId()==R.id.nav_shared_procedures){
+                    i.putExtra(ProcedureGroupActivity.SHOW_SHARED,true);
                 }
-                startActivity(new Intent(BaseNavigationActivity.this,goTo));
+
+                startActivity(i);
+
                 finish();
                 return false;
             }

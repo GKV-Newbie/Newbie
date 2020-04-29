@@ -4,26 +4,16 @@ import java.io.Serializable;
 
 public class Step implements Serializable {
 
-    String id;
     String title;
     String description;
 
     public Step() {
-        this("","","");
+        this("","");
     }
 
-    public Step(String id, String title, String description) {
-        this.id = id;
+    public Step(String title, String description) {
         this.title = title;
         this.description = description;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -45,8 +35,7 @@ public class Step implements Serializable {
     @Override
     public String toString() {
         return "Step{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
+                "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }

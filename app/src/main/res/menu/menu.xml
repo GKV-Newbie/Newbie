@@ -5,16 +5,24 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_procedures"
-            android:icon="@android:drawable/ic_dialog_map"
-            android:title="Procedures" />
+            android:id="@+id/nav_my_account"
+            android:icon="@drawable/user"
+            android:title="My Account" />
+        <item
+            android:id="@+id/nav_search_user"
+            android:icon="@drawable/user_search"
+            android:title="Search Users" />
+        <item
+            android:id="@+id/nav_favourite_user"
+            android:icon="@drawable/star_black"
+            android:title="Favourite Users" />
         <item
             android:id="@+id/nav_my_procedures"
-            android:icon="@android:drawable/btn_star_big_on"
+            android:icon="@drawable/text_file_black"
             android:title="My Procedures" />
         <item
-            android:id="@+id/nav_my_account"
-            android:icon="@android:drawable/btn_star_big_on"
-            android:title="My Account" />
+            android:id="@+id/nav_shared_procedures"
+            android:icon="@drawable/text_file_black"
+            android:title="Shared Procedures" />
     </group>
 </menu>

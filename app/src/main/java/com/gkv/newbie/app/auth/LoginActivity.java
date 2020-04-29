@@ -11,7 +11,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.gkv.newbie.R;
-import com.gkv.newbie.app.home.sections.ProcedureGroupActivity;
+import com.gkv.newbie.app.home.sections.procedure.ProcedureGroupActivity;
 import com.gkv.newbie.utils.auth.UserManager;
 import com.gkv.newbie.utils.internet.ResponseHandler;
 import com.gkv.newbie.utils.internet.Server;
@@ -22,7 +22,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -123,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             UserManager.getInstance().setAuthToken(jsonObject.getString("accessToken"));
+                            UserManager.getInstance().setEmail(user.getEmail());
                             startActivity(new Intent(LoginActivity.this,PostLoginActivity.class));
                             finish();
                         } catch (JSONException e) {
@@ -147,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
     }
     @OnClick(R.id.anonymousButton)
     public void anonymous() {
-        startActivity(new Intent(this, ProcedureGroupActivity.class));
+        startActivity(new Intent(this, CheatLoginActivity.class));
         finish();
     }
 

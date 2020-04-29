@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".app.home.sections.process.CreateStepActivity"
+    android:background="#fff"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.gkv.newbie.ui.textview.GradientTitle
+            android:id="@+id/titleText"
+            style="@style/SimpleTitle"
+            android:text="Step"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/titleBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Step Title"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/descriptionBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Step Description"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:gravity="center">
+
+        <com.gkv.newbie.ui.button.StylishButton
+            android:id="@+id/addActionButton"
+            android:text="Add Action"
+            android:drawableLeft="@drawable/plus"
+            style="@style/BlueButton"
+            />
+
+        <com.gkv.newbie.ui.button.StylishButton
+            android:id="@+id/saveButton"
+            android:text="Save"
+            android:drawableLeft="@drawable/save"
+            style="@style/BlueButton"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_above="@id/linearLayout"
+        android:layout_below="@id/title">
+        <com.gkv.newbie.ui.textview.StylishText
+            style="@style/SimpleText"
+            android:text="List of Actions (Long press to unlink)"
+            android:textStyle="italic" />
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+</RelativeLayout>

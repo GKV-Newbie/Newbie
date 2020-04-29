@@ -57,7 +57,7 @@
                     <ImageButton
                         android:id="@+id/overlayGoBack"
                         style="@style/OverlayImageButton"
-                        android:src="@drawable/back" />
+                        android:src="@drawable/process_back" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -69,7 +69,7 @@
                     <ImageButton
                         android:id="@+id/overlayFullView"
                         style="@style/OverlayImageButton"
-                        android:src="@drawable/launch" />
+                        android:src="@drawable/process_launch" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -81,7 +81,7 @@
                     <ImageButton
                         android:id="@+id/overlayNextButton"
                         style="@style/OverlayImageButton"
-                        android:src="@drawable/forward" />
+                        android:src="@drawable/process_forward" />
                 </LinearLayout>
             </LinearLayout>
 

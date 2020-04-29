@@ -32,7 +32,7 @@ public class ProcessManager {
             if(process == null){
                 return new Step();
             }
-            currentStep = process.getStepById(process.getHeadStepId());
+            currentStep = process.getStepByTitle(process.getHeadStepTitle());
         }
         addToHistory(currentStep);
         return currentStep;
@@ -40,7 +40,7 @@ public class ProcessManager {
 
     private void addToHistory(Step currentStep) {
         if(history.empty() == false){
-            if(history.peek().getId().equals(currentStep.getId())){
+            if(history.peek().getTitle().equals(currentStep.getTitle())){
                 //same step on the top of stack
                 return;
             }
@@ -74,13 +74,13 @@ public class ProcessManager {
         ArrayList<String> stepActionIds = process.getActionsOfStep(currentStep);
         ArrayList<Action> actions = new ArrayList<Action>();
         for (String actionId:stepActionIds) {
-            actions.add(process.getActionById(actionId));
+            actions.add(process.getActionByTitle(actionId));
         }
         return actions;
     }
 
     public Step dispatchAction(Action action){
-        currentStep = process.getStepById(action.getStepId());
+        currentStep = process.getStepByTitle(action.getStepTitle());
         if(currentStep == null)
             return new Step();
         return currentStep;

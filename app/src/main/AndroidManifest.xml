@@ -8,19 +8,29 @@
         android:allowBackup="true"
         android:icon="@drawable/newbie"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@drawable/newbie"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".app.home.sections.MyProcedureGroupActivity"></activity>
-        <activity android:name=".app.home.sections.UserAccountActivity" />
+        <activity android:name=".app.auth.CheatLoginActivity"></activity>
+        <activity android:name=".app.home.sections.process.CreateActionActivity" />
+        <activity android:name=".app.home.sections.process.CreateStepActivity" />
+        <activity android:name=".app.home.sections.process.CreateProcessActivity" />
+        <activity android:name=".app.home.sections.procedure.ShareProcedureActivity" />
+        <activity android:name=".app.home.sections.procedure.ProcedureProcessActivity" />
+        <activity android:name=".app.home.sections.procedure.CreateProcedureActivity" />
+        <activity android:name=".app.home.sections.user.FavouriteUserListActivity" />
+        <activity android:name=".app.home.sections.user.SearchUserActivity" />
+        <activity android:name=".app.home.sections.user.UpdateUserActivity" />
+        <activity android:name=".app.home.sections.user.ViewUserActivity" />
         <activity
             android:name=".app.home.BaseNavigationActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".app.auth.PostLoginActivity" />
         <activity android:name=".app.auth.LoginActivity" />
         <activity
-            android:name=".app.home.sections.ProcedureGroupActivity"
+            android:name=".app.home.sections.procedure.ProcedureGroupActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
@@ -28,7 +38,7 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".app.home.sections.ProcessInstructionsActivity"
+            android:name=".app.home.sections.process.ProcessInstructionsActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity android:name=".MainActivity">
@@ -39,9 +49,11 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-
     <uses-permission android:name="android.permission.REORDER_TASKS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>

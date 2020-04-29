@@ -1,6 +1,5 @@
-package com.gkv.newbie.app.home.sections;
+package com.gkv.newbie.app.home.sections.process;
 
-import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -21,6 +20,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.gkv.newbie.app.home.BaseNavigationActivity;
+import com.gkv.newbie.modelmanager.ProcessHolder;
 import com.google.gson.Gson;
 import com.gkv.newbie.R;
 import com.gkv.newbie.model.Action;
@@ -169,7 +169,7 @@ public class ProcessInstructionsActivity extends BaseNavigationActivity {
 
         Gson gson = new Gson();
 
-        Process process = createDummyProcess();
+        Process process = ProcessHolder.getInstance().getProcess();
 
         String encodedProcess = getIntent().getStringExtra(EXTRA_PROCESS_ENCODED);
 
@@ -191,7 +191,7 @@ public class ProcessInstructionsActivity extends BaseNavigationActivity {
     }
 
     private Process createDummyProcess() {
-        Step stepOpenW = new Step("OpenWA","Whatsapp","Click the green icon with phone");
+        /*Step stepOpenW = new Step("OpenWA","Whatsapp","Click the green icon with phone");
         Step stepOpenChat = new Step("OpenChat","Chat Tab","Click the chat tab in the top");
         Step stepOpenIndvChat = new Step("OpenIndvChat","Individual Chat","Click on the contact in the list");
         Step stepOpenSettings = new Step("OpenSettings","Settings Tab","Click the settings tab in the top");
@@ -205,11 +205,11 @@ public class ProcessInstructionsActivity extends BaseNavigationActivity {
         Action actionCapturePreview = new Action(stepCapturePreview.getId()+"action1","Examine Preview",stepCapturePreview.getId());
         Action actionOpenSettings = new Action(stepOpenSettings.getId()+"action1","Open Settings Tab",stepOpenSettings.getId());
         Action actionOpenProfile = new Action(stepOpenProfile.getId()+"action1","Click Profile ListItem",stepOpenProfile.getId());
-        Action actionCaptureProfilePicture = new Action(stepOpenCamera.getId()+"action2","Capture Profile Picture",stepOpenCamera.getId());
+        Action actionCaptureProfilePicture = new Action(stepOpenCamera.getId()+"action2","Capture Profile Picture",stepOpenCamera.getId());*/
 
         Process process = new Process();
 
-        process.setHeadStepId(stepOpenW.getId());
+        /*process.setHeadStepId(stepOpenW.getId());
 
         process.putStepActionAssociation(stepOpenW,actionOpenChat);
         process.putStepActionAssociation(stepOpenW,actionOpenSettings);
@@ -218,7 +218,7 @@ public class ProcessInstructionsActivity extends BaseNavigationActivity {
         process.putStepActionAssociation(stepOpenCamera,actionCapturePreview);
         process.putStepActionAssociation(stepOpenSettings,actionOpenProfile);
         process.putStepActionAssociation(stepOpenProfile,actionCaptureProfilePicture);
-        process.putStep(stepCapturePreview);
+        process.putStep(stepCapturePreview);*/
         return process;
     }
 

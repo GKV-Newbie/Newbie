@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".app.home.sections.user.SearchUserActivity"
+    android:background="#fff"
+    android:padding="10dp">
+
+    <com.gkv.newbie.ui.textview.GradientTitle
+        android:id="@+id/name"
+        style="@style/SimpleTitle"
+        android:text="Search User"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/searchBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="User Email"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            android:id="@+id/searchBoxTv"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingLeft="10dp"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <com.gkv.newbie.ui.button.StylishButton
+            android:id="@+id/searchButton"
+            android:text="Search"
+            android:drawableLeft="@drawable/search"
+            style="@style/BlueButton"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
