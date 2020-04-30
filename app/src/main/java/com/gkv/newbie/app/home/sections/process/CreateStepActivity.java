@@ -35,8 +35,6 @@ public class CreateStepActivity extends BaseNavigationActivity {
     Process process;
     Step step;
 
-    String _stepTitle;
-
     @BindView(R.id.listView)
     ListView listView;
     ArrayAdapter<String> arrayAdapter;
@@ -50,7 +48,6 @@ public class CreateStepActivity extends BaseNavigationActivity {
 
         process = ProcessHolder.getInstance().getProcess();
         step = ProcessHolder.getInstance().getStep();
-        _stepTitle = step.getTitle();
 
         init();
 
@@ -71,7 +68,9 @@ public class CreateStepActivity extends BaseNavigationActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ProcessHolder.getInstance().setAction(process.getActionByTitle(process.getActionsOfStep(step).get(i)));
+                ProcessHolder.getInstance().setAction(
+                        process.getActionByName(process.getActionsOfStep(step).get(i))
+                );
                 startActivity(new Intent(CreateStepActivity.this,CreateActionActivity.class));
             }
         });
@@ -80,7 +79,7 @@ public class CreateStepActivity extends BaseNavigationActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 process.removeStepActionAssociation(step,
-                        process.getActionByTitle(process.getActionsOfStep(step).get(i))
+                        process.getActionByName(process.getActionsOfStep(step).get(i))
                         );
                 refresh();
                 return false;
@@ -109,18 +108,22 @@ public class CreateStepActivity extends BaseNavigationActivity {
 
     @OnClick(R.id.addActionButton)
     public void addAction(){
-        Keyboard.closeKeyboard(this);
-        refreshStep();
+        try {
+            Keyboard.closeKeyboard(this);
+            refreshStep();
 
-        if(process.hasStep(step.getTitle()) == false){
-            Snackbar.make(getRoot(),"Please save the step before adding actions.",Snackbar.LENGTH_LONG).show();
-            return;
+            if(process.hasStep(step.getId()) == false){
+                Snackbar.make(getRoot(),"Please save the step before adding actions.",Snackbar.LENGTH_LONG).show();
+                return;
+            }
+
+            ProcessHolder.getInstance().setStep(step);
+            ProcessHolder.getInstance().setAction(new Action());
+
+            startActivity(new Intent(this,CreateActionActivity.class));
+        }catch (Exception e){
+            e.printStackTrace();
         }
-
-        ProcessHolder.getInstance().setStep(step);
-        ProcessHolder.getInstance().setAction(new Action());
-
-        startActivity(new Intent(this,CreateActionActivity.class));
     }
 
     @OnClick(R.id.saveButton)
@@ -131,15 +134,13 @@ public class CreateStepActivity extends BaseNavigationActivity {
             Snackbar.make(getRoot(),"Title cant be empty",Snackbar.LENGTH_LONG).show();
             return;
         }
-        process.updateStep(_stepTitle,step);
+        process.putStep(step);
         finish();
     }
 
     private void refreshStep() {
-        step = new Step(
-                titleBox.getEditText().getText().toString(),
-                descriptionBox.getEditText().getText().toString()
-        );
+        step.setTitle(titleBox.getEditText().getText().toString());
+        step.setDescription(descriptionBox.getEditText().getText().toString());
     }
 
 }

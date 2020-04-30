@@ -137,7 +137,8 @@ public class CreateProcedureActivity extends BaseNavigationActivity {
         try {
 
             Process process = POJO.getInstance().fromJson(procedure.getProcess(),Process.class);
-            System.out.println(process.getHeadStepTitle().toLowerCase());
+            System.out.println(process.getHeadStepId().toLowerCase());
+            ProcessHolder.getInstance().setSave(false);
             ProcessHolder.getInstance().setProcess(process);
 
         } catch (Exception e){
@@ -165,10 +166,14 @@ public class CreateProcedureActivity extends BaseNavigationActivity {
         procedure.setName(nameBox.getEditText().getText().toString());
         procedure.setShareType(sharingType.getCheckedChipId() == R.id.public_chip ? "public" : "private");
         procedure.setProcedureType(procedureType.getCheckedChipId() == R.id.group_chip ? "group" : "process");
-        if(procedureType.getCheckedChipId() == R.id.process_chip)
-            procedure.setProcess(POJO.getInstance().toJson(
-                    ProcessHolder.getInstance().getProcess()
-            ));
+        if(procedureType.getCheckedChipId() == R.id.process_chip) {
+            if (ProcessHolder.getInstance().isSave())
+                procedure.setProcess(POJO.getInstance().toJson(
+                        ProcessHolder.getInstance().getProcess()
+                ));
+        }else{
+            procedure.setProcess("{}");
+        }
     }
 
     private void submitCreate() {

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Step implements Serializable {
 
+    String id;
     String title;
     String description;
 
@@ -12,8 +13,21 @@ public class Step implements Serializable {
     }
 
     public Step(String title, String description) {
+        this(String.valueOf(System.currentTimeMillis()),title,description);
+    }
+
+    public Step(String id, String title, String description) {
+        this.id = id;
         this.title = title;
         this.description = description;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -35,7 +49,8 @@ public class Step implements Serializable {
     @Override
     public String toString() {
         return "Step{" +
-                "title='" + title + '\'' +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }

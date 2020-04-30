@@ -104,30 +104,36 @@ public class ProcessInstructionsActivity extends BaseNavigationActivity {
         overlayActionClicked = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(actions.size()==1){
-                    dispatchAction(actions.get(0));
-                    return;
+                try {
+                    if(actions.size()==1){
+                        System.out.println(actions.get(0));
+                        dispatchAction(actions.get(0));
+                        return;
+                    }
+                    menuItemActionMap.clear();
+                    PopupMenu menu = new PopupMenu(ProcessInstructionsActivity.this,view);
+                    int temp = 0;
+                    for(Action action : actions){
+                        menuItemActionMap.put(
+                                menu.getMenu().add(
+                                        0,temp++,0,
+                                        action.getName()
+                                ).getItemId(),
+                                action
+                        );
+                    }
+                    menu.setOnMenuItemClickListener(popupMenuClicked);
+                    menu.show();
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
-                menuItemActionMap.clear();
-                PopupMenu menu = new PopupMenu(ProcessInstructionsActivity.this,view);
-                int temp = 0;
-                for(Action action : actions){
-                    menuItemActionMap.put(
-                            menu.getMenu().add(
-                                    0,temp++,0,
-                                    action.getName()
-                            ).getItemId(),
-                            action
-                    );
-                }
-                menu.setOnMenuItemClickListener(popupMenuClicked);
-                menu.show();
             }
         };
         nextButton.setOnClickListener(overlayActionClicked);
     }
 
     private void dispatchAction(Action action){
+        System.out.println(action);
         processManager.dispatchAction(action);
         showCurrentStep();
     }

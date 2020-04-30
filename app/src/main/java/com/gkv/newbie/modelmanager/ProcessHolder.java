@@ -14,6 +14,8 @@ public class ProcessHolder {
 
     private Action action;
 
+    boolean save = false;
+
     private ProcessHolder(){
         process = new Process();
         step = new Step();
@@ -49,4 +51,14 @@ public class ProcessHolder {
     public void setAction(Action action) {
         this.action = action;
     }
+
+    public boolean isSave() {
+        return save;
+    }
+
+    public void setSave(boolean save) {
+        this.save = save;
+    }
+
+
 }

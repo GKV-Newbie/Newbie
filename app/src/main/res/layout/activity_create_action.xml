@@ -15,10 +15,10 @@
         android:text="Action"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/titleBox"
+        android:id="@+id/nameBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Action Title"
+        android:hint="Action Name"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText

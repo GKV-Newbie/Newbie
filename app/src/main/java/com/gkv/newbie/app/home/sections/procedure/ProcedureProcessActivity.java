@@ -99,7 +99,7 @@ public class ProcedureProcessActivity extends BaseNavigationActivity {
     public void openProcess(){
         try {
             Process process = POJO.getInstance().fromJson(procedure.getProcess(), Process.class);
-            if(process.getHeadStepTitle().length()==0){
+            if(process.getHeadStepId().length()==0){
                 processNotLoaded();
                 return;
             }

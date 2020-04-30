@@ -2,16 +2,30 @@ package com.gkv.newbie.model;
 
 public class Action {
 
+    String id;
     String name;
-    String stepTitle;
+    String stepId;
 
     public Action() {
         this("","");
     }
 
-    public Action(String name, String stepTitle) {
+    public Action(String name, String stepId) {
+        this(String.valueOf(System.currentTimeMillis()),name,stepId);
+    }
+
+    public Action(String id, String name, String stepId) {
+        this.id = id;
         this.name = name;
-        this.stepTitle = stepTitle;
+        this.stepId = stepId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -22,19 +36,20 @@ public class Action {
         this.name = name;
     }
 
-    public String getStepTitle() {
-        return stepTitle;
+    public String getStepId() {
+        return stepId;
     }
 
-    public void setStepTitle(String stepTitle) {
-        this.stepTitle = stepTitle;
+    public void setStepId(String stepId) {
+        this.stepId = stepId;
     }
 
     @Override
     public String toString() {
         return "Action{" +
-                "name='" + name + '\'' +
-                ", stepTitle='" + stepTitle + '\'' +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", stepId='" + stepId + '\'' +
                 '}';
     }
 }

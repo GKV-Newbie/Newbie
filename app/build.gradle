@@ -51,6 +51,8 @@ dependencies {
 
     implementation 'com.karumi:dexter:6.1.0'
 
+    implementation 'com.balsikandar.android:crashreporter:1.1.0'
+
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

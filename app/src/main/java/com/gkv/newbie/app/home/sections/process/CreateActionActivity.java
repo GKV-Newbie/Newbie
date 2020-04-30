@@ -27,8 +27,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class CreateActionActivity extends BaseNavigationActivity {
 
-    @BindView(R.id.titleBox)
-    TextInputLayout titleBox;
+    @BindView(R.id.nameBox)
+    TextInputLayout nameBox;
 
     @BindView(R.id.stepsList)
     AutoCompleteTextView stepsList;
@@ -39,8 +39,6 @@ public class CreateActionActivity extends BaseNavigationActivity {
 
     Action action;
 
-    String _actionName;
-
     ArrayAdapter<String> arrayAdapter;
 
     int selection=-1;
@@ -50,15 +48,18 @@ public class CreateActionActivity extends BaseNavigationActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_action);
 
-        ButterKnife.bind(this);
+        try {
 
-        process = ProcessHolder.getInstance().getProcess();
-        step = ProcessHolder.getInstance().getStep();
-        action = ProcessHolder.getInstance().getAction();
+            ButterKnife.bind(this);
 
-        _actionName = action.getName();
+            process = ProcessHolder.getInstance().getProcess();
+            step = ProcessHolder.getInstance().getStep();
+            action = ProcessHolder.getInstance().getAction();
 
-        init();
+            init();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -78,9 +79,14 @@ public class CreateActionActivity extends BaseNavigationActivity {
             }
         });
 
-        titleBox.getEditText().setText(action.getName());
-        selection = process.stepList().indexOf(action.getStepTitle());
-        stepsList.setText(action.getStepTitle(),false);
+        nameBox.getEditText().setText(action.getName());
+        try {
+            selection = process.stepList().indexOf(process.getStepById(action.getStepId()).getTitle());
+            stepsList.setText(process.getStepById(action.getStepId()).getTitle(),false);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     @OnClick(R.id.saveButton)
@@ -94,21 +100,23 @@ public class CreateActionActivity extends BaseNavigationActivity {
                 return;
             }
 
-            if(process.hasAction(action.getName())){
-                if(process.getActionByTitle(action.getName()).getStepTitle().equals(action.getStepTitle()) == false){
+            Action pre = process.getActionByName(action.getName());
+
+            if(pre != null){
+                if(pre.getStepId().equals(action.getStepId()) == false){
                     Snackbar.make(getRoot(),"Action exists with that name",Snackbar.LENGTH_LONG).show();
                     return;
                 }
             }
 
-            if(process.hasStep(action.getStepTitle()) == false){
+            if(process.hasStep(action.getStepId()) == false){
                 Snackbar.make(getRoot(),"Invalid Step",Snackbar.LENGTH_LONG).show();
                 return;
             }
 
-            if(process.hasAction(action.getName()) == false){
-                process.updateAction(_actionName,action);
-            }
+//            if(process.hasAction(action.getId()) == false){
+//                process.putAction(action);
+//            }
 
             process.putStepActionAssociation(step,action);
 
@@ -120,10 +128,8 @@ public class CreateActionActivity extends BaseNavigationActivity {
     }
 
     private void refreshAction() {
-        action = new Action(
-                titleBox.getEditText().getText().toString(),
-                process.stepList().get(selection)
-        );
+        action.setName(nameBox.getEditText().getText().toString());
+        action.setStepId(process.getStepByTitle(process.stepList().get(selection)).getId());
     }
 
 }

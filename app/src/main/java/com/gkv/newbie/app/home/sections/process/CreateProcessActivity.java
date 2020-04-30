@@ -114,7 +114,10 @@ public class CreateProcessActivity extends BaseNavigationActivity {
             popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
-                    process.setHeadStepTitle(menuItem.getTitle().toString());
+
+                    process.setHeadStepId(process.getStepByTitle(menuItem.getTitle().toString()).getId());
+
+                    ProcessHolder.getInstance().setSave(true);
                     finish();
                     return false;
                 }
