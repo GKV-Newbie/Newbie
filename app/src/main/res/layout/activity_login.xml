@@ -31,6 +31,7 @@
         <com.gkv.newbie.ui.button.StylishButton
             android:id="@+id/anonymousButton"
             android:text="Cheat Login"
+            android:visibility="gone"
             style="@style/BlueButton"
             />
     </LinearLayout>

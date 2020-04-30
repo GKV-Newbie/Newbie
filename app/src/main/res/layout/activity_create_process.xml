@@ -9,6 +9,7 @@
     android:background="#fff"
     android:padding="10dp">
 
+
     <LinearLayout
         android:id="@+id/title"
         android:layout_width="match_parent"
