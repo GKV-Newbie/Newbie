@@ -47,9 +47,10 @@
         style="@style/SimpleTitle"
         android:text="Procedure Shared with"/>
 
-    <com.gkv.newbie.ui.textview.StylishText
+    <com.gkv.newbie.ui.textview.StylishTextItalic
         style="@style/SimpleText"
-        android:text="Click on the user to revoke access"
+        android:text="(Click on the user to revoke access)"
+        android:textColor="#888"
         android:textStyle="italic" />
 
     <ListView

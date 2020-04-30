@@ -53,6 +53,17 @@ public class Process implements Serializable {
         return stepMap.put(step.getTitle(),step);
     }
 
+    public Step updateStep(String title,Step step){
+        if(title.equals("")==false) {
+            for (String actionName : actionMap.keySet()) {
+                if (actionMap.get(actionName).getStepTitle().equals(title))
+                    actionMap.get(actionName).setStepTitle(step.getTitle());
+            }
+            stepMap.remove(title);
+        }
+        return putStep(step);
+    }
+
     public Action getActionByTitle(String title){
         System.out.println("getActionByTitle "+title+" > "+actionMap.get(title));
         return actionMap.get(title);
@@ -61,6 +72,18 @@ public class Process implements Serializable {
     public Action putAction(Action action){
         System.out.println("putAction "+action);
         return actionMap.put(action.getName(),action);
+    }
+
+    public Action updateAction(String name,Action action){
+        if(name.equals("")==false){
+            for(String stepTitle:stepActionMap.keySet()){
+                if(stepActionMap.get(stepTitle).contains(name)){
+                    stepActionMap.get(stepTitle).remove(name);
+                    stepActionMap.get(stepTitle).add(action.getName());
+                }
+            }
+        }
+        return putAction(action);
     }
 
     public boolean putStepActionAssociation(Step step, Action action){

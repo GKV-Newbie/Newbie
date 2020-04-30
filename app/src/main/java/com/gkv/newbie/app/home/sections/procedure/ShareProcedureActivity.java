@@ -19,11 +19,13 @@ import com.gkv.newbie.app.home.BaseNavigationActivity;
 import com.gkv.newbie.app.home.sections.user.ViewUserActivity;
 import com.gkv.newbie.model.Procedure;
 import com.gkv.newbie.model.User;
+import com.gkv.newbie.utils.Keyboard;
 import com.gkv.newbie.utils.gson.POJO;
 import com.gkv.newbie.utils.internet.ResponseHandler;
 import com.gkv.newbie.utils.internet.Server;
 import com.gkv.newbie.utils.locallists.FavouriteManager;
 import com.gkv.newbie.utils.locallists.HistoryManager;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
@@ -125,13 +127,13 @@ public class ShareProcedureActivity extends BaseNavigationActivity {
                 new ResponseHandler() {
                     @Override
                     public void onCallback(String response) {
-                        Toast.makeText(ShareProcedureActivity.this,response,Toast.LENGTH_LONG).show();
+                        Snackbar.make(getRoot(),"Access is revoked.",Snackbar.LENGTH_LONG).show();
                     }
                 },
                 new ResponseHandler() {
                     @Override
                     public void onCallback(String error) {
-                        Toast.makeText(ShareProcedureActivity.this,error,Toast.LENGTH_LONG).show();
+                        Snackbar.make(getRoot(),error,Snackbar.LENGTH_LONG).show();
                     }
                 }
         );
@@ -139,6 +141,7 @@ public class ShareProcedureActivity extends BaseNavigationActivity {
 
     @OnClick(R.id.shareButton)
     public void shareProcedure(){
+        Keyboard.closeKeyboard(this);
         Server.getInstance().giveAccessProcedure(
                 this,
                 procedure.get_id(),
@@ -146,13 +149,13 @@ public class ShareProcedureActivity extends BaseNavigationActivity {
                 new ResponseHandler() {
                     @Override
                     public void onCallback(String response) {
-                        Toast.makeText(ShareProcedureActivity.this,response,Toast.LENGTH_LONG).show();
+                        Snackbar.make(getRoot(),"Procedure is shared.",Snackbar.LENGTH_LONG).show();
                     }
                 },
                 new ResponseHandler() {
                     @Override
                     public void onCallback(String error) {
-                        Toast.makeText(ShareProcedureActivity.this,error,Toast.LENGTH_LONG).show();
+                        Snackbar.make(getRoot(),error,Snackbar.LENGTH_LONG).show();
                     }
                 }
         );

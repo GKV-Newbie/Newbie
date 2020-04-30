@@ -5,6 +5,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +23,9 @@ import com.gkv.newbie.utils.auth.UserManager;
 import com.gkv.newbie.utils.gson.POJO;
 import com.gkv.newbie.utils.internet.ResponseHandler;
 import com.gkv.newbie.utils.internet.Server;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 
 public class ProcedureProcessActivity extends BaseNavigationActivity {
 
@@ -96,7 +100,7 @@ public class ProcedureProcessActivity extends BaseNavigationActivity {
         try {
             Process process = POJO.getInstance().fromJson(procedure.getProcess(), Process.class);
             if(process.getHeadStepTitle().length()==0){
-                Toast.makeText(this,"Unable to load process at the moment. Please try again.",Toast.LENGTH_LONG).show();
+                processNotLoaded();
                 return;
             }
             ProcessHolder.getInstance().setProcess(
@@ -105,7 +109,55 @@ public class ProcedureProcessActivity extends BaseNavigationActivity {
             startActivity(new Intent(this, ProcessInstructionsActivity.class));
         }catch (Exception e){
             e.printStackTrace();
+            processNotLoaded();
         }
+    }
+
+    private void processNotLoaded() {
+        if(UserManager.getInstance().getEmail().equals(procedure.getOwner().getEmail())){
+            Snackbar.make(getRoot(),"Unable to load process at the moment. Please try again.",Snackbar.LENGTH_LONG).show();
+        }else{
+            new MaterialAlertDialogBuilder(this)
+                    .setTitle("Do you want to request access?")
+                    .setMessage("The owner of the process has made it private. Owner can give you access to view upon request.")
+                    .setPositiveButton("Request",new DialogInterface.OnClickListener(){
+
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            requestAccess();
+                        }
+                    })
+                    .setNegativeButton("Cancel",new DialogInterface.OnClickListener(){
+
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    }).show();
+//            .setNegativeButton("No") { dialog, which ->
+//                    // Respond to negative button press
+//                }
+//            .setPositiveButton("Request") { dialog, which ->
+//                    // Respond to positive button press
+//                }
+//            .show();
+        }
+    }
+
+    private void requestAccess() {
+        Server.getInstance().requestAccessProcedure(this, procedure.get_id(), UserManager.getInstance().getEmail(),
+                new ResponseHandler() {
+                    @Override
+                    public void onCallback(String response) {
+                        Snackbar.make(getRoot(),"Request Sent",Snackbar.LENGTH_LONG).show();
+                    }
+                },
+                new ResponseHandler() {
+                    @Override
+                    public void onCallback(String error) {
+                        Snackbar.make(getRoot(),"Unknown Issue. Please try again.",Snackbar.LENGTH_LONG).show();
+                    }
+                });
     }
 
     @OnClick(R.id.updateProcedureButton)

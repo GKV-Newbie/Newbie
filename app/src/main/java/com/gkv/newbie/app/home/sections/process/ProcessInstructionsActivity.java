@@ -282,20 +282,20 @@ public class ProcessInstructionsActivity extends BaseNavigationActivity {
 //            @Override
 //            public void run() {
 //                final String temp = overlayDescription.getText().toString();
-//                Toast.makeText(ProcessInstructionsActivity.this,String.valueOf(overlayDescription.getMeasuredHeight()),Toast.LENGTH_LONG).show();
+//                Toast.makeText(ProcessInstructionsActivity.this,String.valueOf(overlayDescription.getMeasuredHeight()),Snackbar.LENGTH_LONG).show();
 //                overlayDescription.setText("A\nB\nC");
 //                overlayDescription.post(new Runnable() {
 //                    @Override
 //                    public void run() {
 //                        overlayDescription.setMinHeight(overlayDescription.getMeasuredHeight());
-//                        Toast.makeText(ProcessInstructionsActivity.this,String.valueOf(overlayDescription.getMeasuredHeight()),Toast.LENGTH_LONG).show();
+//                        Toast.makeText(ProcessInstructionsActivity.this,String.valueOf(overlayDescription.getMeasuredHeight()),Snackbar.LENGTH_LONG).show();
 //                        overlayDescription.setText(temp);
 //                        mTestView.post(new Runnable() {
 //                            @Override
 //                            public void run() {
 //                                mTestView.setMinimumWidth(mTestView.getMeasuredWidth());
 //                                mTestView.setMinimumHeight(mTestView.getMeasuredHeight());
-//                                Toast.makeText(ProcessInstructionsActivity.this,String.valueOf(mTestView.getMeasuredHeight()),Toast.LENGTH_LONG).show();
+//                                Toast.makeText(ProcessInstructionsActivity.this,String.valueOf(mTestView.getMeasuredHeight()),Snackbar.LENGTH_LONG).show();
 //                                //hideOverlay();
 //                            }
 //                        });

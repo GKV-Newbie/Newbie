@@ -5,28 +5,34 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gkv.newbie.R;
+import com.gkv.newbie.app.home.BaseNavigationActivity;
 import com.gkv.newbie.app.home.sections.process.CreateProcessActivity;
 import com.gkv.newbie.model.Procedure;
 import com.gkv.newbie.model.Process;
 import com.gkv.newbie.modelmanager.ProcessHolder;
+import com.gkv.newbie.utils.Keyboard;
 import com.gkv.newbie.utils.auth.UserManager;
 import com.gkv.newbie.utils.gson.POJO;
 import com.gkv.newbie.utils.internet.ResponseHandler;
 import com.gkv.newbie.utils.internet.Server;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONObject;
 
-public class CreateProcedureActivity extends AppCompatActivity {
+public class CreateProcedureActivity extends BaseNavigationActivity {
 
     public static final String UPDATE = "UPDATE" ;
     public static final String DATA = "DATA" ;
@@ -123,6 +129,8 @@ public class CreateProcedureActivity extends AppCompatActivity {
     @OnClick(R.id.processButton)
     public void editProcess(){
 
+        Keyboard.closeKeyboard(this);
+
         if(procedureType.getCheckedChipId() == R.id.group_chip)
             return;
 
@@ -133,17 +141,18 @@ public class CreateProcedureActivity extends AppCompatActivity {
             ProcessHolder.getInstance().setProcess(process);
 
         } catch (Exception e){
-
+            ProcessHolder.getInstance().setProcess(new Process());
         }
-
-        ProcessHolder.getInstance().setProcess(new Process());
 
         startActivity(new Intent(this, CreateProcessActivity.class));
 
     }
 
+
+
     @OnClick(R.id.submitButton)
     public void submitButton(){
+        Keyboard.closeKeyboard(this);
         fetchInputDetails();
         if(update){
             submitUpdate();
@@ -178,7 +187,7 @@ public class CreateProcedureActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             jsonObject.remove("owner");
                             Procedure temp = POJO.getInstance().fromJson(jsonObject.toString(),Procedure.class);
-                            toast(temp.getName());
+                            toast(temp.getName()+" is created.");
                         }catch (Exception e){
                             toast(e.toString());
                         }
@@ -208,7 +217,7 @@ public class CreateProcedureActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             jsonObject.remove("owner");
                             Procedure temp = POJO.getInstance().fromJson(jsonObject.toString(),Procedure.class);
-                            toast(temp.getName());
+                            toast(temp.getName()+" is updated.");
                         }catch (Exception e){
                             toast(e.toString());
                         }
@@ -224,6 +233,6 @@ public class CreateProcedureActivity extends AppCompatActivity {
     }
 
     public void toast(String msg){
-        Toast.makeText(CreateProcedureActivity.this,msg,Toast.LENGTH_LONG).show();
+        Snackbar.make(getRoot(),msg,Snackbar.LENGTH_LONG).show();
     }
 }

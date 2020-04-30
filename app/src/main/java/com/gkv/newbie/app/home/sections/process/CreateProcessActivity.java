@@ -20,6 +20,7 @@ import com.gkv.newbie.R;
 import com.gkv.newbie.app.home.BaseNavigationActivity;
 import com.gkv.newbie.model.Step;
 import com.gkv.newbie.modelmanager.ProcessHolder;
+import com.gkv.newbie.utils.Keyboard;
 import com.gkv.newbie.utils.gson.POJO;
 import com.gkv.newbie.model.Process;
 
@@ -96,12 +97,14 @@ public class CreateProcessActivity extends BaseNavigationActivity {
 
     @OnClick(R.id.addStepButton)
     public void addStep(){
+        Keyboard.closeKeyboard(this);
         ProcessHolder.getInstance().setStep(new Step());
         startActivity(new Intent(this,CreateStepActivity.class));
     }
 
     @OnClick(R.id.saveButton)
     public void save(){
+        Keyboard.closeKeyboard(this);
         try {
             System.out.println(POJO.getInstance().toJson(process));
             PopupMenu popupMenu = new PopupMenu(this,save);

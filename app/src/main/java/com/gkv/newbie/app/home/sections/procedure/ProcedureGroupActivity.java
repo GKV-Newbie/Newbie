@@ -19,6 +19,7 @@ import com.gkv.newbie.modelmanager.ProcessHolder;
 import com.gkv.newbie.utils.gson.POJO;
 import com.gkv.newbie.utils.internet.ResponseHandler;
 import com.gkv.newbie.utils.internet.Server;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -86,7 +87,7 @@ public class ProcedureGroupActivity extends BaseNavigationActivity {
         failureHandler = new ResponseHandler() {
             @Override
             public void onCallback(String error) {
-            Toast.makeText(ProcedureGroupActivity.this,error,Toast.LENGTH_LONG).show();
+                Snackbar.make(getRoot(),error,Snackbar.LENGTH_LONG).show();
             }
         };
 

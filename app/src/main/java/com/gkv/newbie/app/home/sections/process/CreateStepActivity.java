@@ -19,7 +19,9 @@ import com.gkv.newbie.model.Action;
 import com.gkv.newbie.model.Process;
 import com.gkv.newbie.model.Step;
 import com.gkv.newbie.modelmanager.ProcessHolder;
+import com.gkv.newbie.utils.Keyboard;
 import com.gkv.newbie.utils.gson.POJO;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class CreateStepActivity extends BaseNavigationActivity {
@@ -32,6 +34,8 @@ public class CreateStepActivity extends BaseNavigationActivity {
 
     Process process;
     Step step;
+
+    String _stepTitle;
 
     @BindView(R.id.listView)
     ListView listView;
@@ -46,6 +50,7 @@ public class CreateStepActivity extends BaseNavigationActivity {
 
         process = ProcessHolder.getInstance().getProcess();
         step = ProcessHolder.getInstance().getStep();
+        _stepTitle = step.getTitle();
 
         init();
 
@@ -104,10 +109,11 @@ public class CreateStepActivity extends BaseNavigationActivity {
 
     @OnClick(R.id.addActionButton)
     public void addAction(){
+        Keyboard.closeKeyboard(this);
         refreshStep();
 
         if(process.hasStep(step.getTitle()) == false){
-            Toast.makeText(this,"Please save the step before adding actions.",Toast.LENGTH_LONG).show();
+            Snackbar.make(getRoot(),"Please save the step before adding actions.",Snackbar.LENGTH_LONG).show();
             return;
         }
 
@@ -119,12 +125,13 @@ public class CreateStepActivity extends BaseNavigationActivity {
 
     @OnClick(R.id.saveButton)
     public void save(){
+        Keyboard.closeKeyboard(this);
         refreshStep();
         if(step.getTitle().length()==0){
-            Toast.makeText(this,"Title cant be empty",Toast.LENGTH_LONG).show();
+            Snackbar.make(getRoot(),"Title cant be empty",Snackbar.LENGTH_LONG).show();
             return;
         }
-        process.putStep(step);
+        process.updateStep(_stepTitle,step);
         finish();
     }
 

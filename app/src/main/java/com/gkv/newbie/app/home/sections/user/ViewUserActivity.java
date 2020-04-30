@@ -30,6 +30,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
@@ -94,7 +95,8 @@ public class ViewUserActivity extends BaseNavigationActivity {
                         try {
                             loadUser(POJO.getInstance().fromJson(response,User.class),false);
                         }catch (Exception e){
-
+                            Toast.makeText(ViewUserActivity.this,"Having some trouble finding the requested user. Please try again",Toast.LENGTH_LONG).show();
+                            onBackPressed();
                         }
                     }
                 },

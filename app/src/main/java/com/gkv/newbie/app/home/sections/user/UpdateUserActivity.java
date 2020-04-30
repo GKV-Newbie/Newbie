@@ -13,6 +13,7 @@ import android.util.Base64;
 import android.widget.ImageView;
 
 import com.gkv.newbie.R;
+import com.gkv.newbie.utils.Keyboard;
 import com.gkv.newbie.utils.internet.ResponseHandler;
 import com.gkv.newbie.utils.internet.Server;
 import com.google.android.material.textfield.TextInputLayout;
@@ -56,6 +57,7 @@ public class UpdateUserActivity extends AppCompatActivity {
 
     @OnClick(R.id.updateButton)
     public void update(){
+        Keyboard.closeKeyboard(this);
         Server.getInstance().updateUser(this,
                 textInputLayout.getEditText().getText().toString(),
                 getImageLink(),
@@ -77,6 +79,7 @@ public class UpdateUserActivity extends AppCompatActivity {
 
     @OnClick(R.id.profile_image)
     public void updateDisplayPicture() {
+        Keyboard.closeKeyboard(this);
         Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
         getIntent.setType("image/*");
 

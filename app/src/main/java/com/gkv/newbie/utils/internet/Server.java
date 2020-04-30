@@ -404,6 +404,37 @@ public class Server {
 
     }
 
+
+    public void requestAccessProcedure(
+            Activity activity,
+            String id,
+            String email,
+            ResponseHandler successHandler,
+            ResponseHandler failureHandler
+    ){
+
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("id",id);
+            jsonObject.put("email", email);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        RequestBody requestBody = RequestBody.create(JSON,jsonObject.toString());
+
+        Request request = new Request.Builder()
+                .url(BASE_URL + "/procedure/share/request")
+                .addHeader("Authorization","Bearer "+ getAuthToken())
+                .addHeader("Content-Type","application/json")
+                .put(requestBody)
+                .build();
+
+        requestHandler(activity,request,successHandler,failureHandler);
+
+    }
+
     public void revokeAccessProcedure(
             Activity activity,
             String id,

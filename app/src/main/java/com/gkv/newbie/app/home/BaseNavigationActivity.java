@@ -125,11 +125,16 @@ public class BaseNavigationActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    LinearLayout root;
+
     @Override
     public void setContentView(int layout){
-        LinearLayout l = (LinearLayout) findViewById(R.id.main_include_layout);
+        root = (LinearLayout) findViewById(R.id.main_include_layout);
         LayoutInflater linf = LayoutInflater.from(this);
-        l.addView(linf.inflate(layout,null),new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+        root.addView(linf.inflate(layout,null),new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
     }
 
+    public LinearLayout getRoot() {
+        return root;
+    }
 }

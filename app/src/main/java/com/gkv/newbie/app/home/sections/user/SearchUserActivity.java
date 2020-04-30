@@ -6,15 +6,19 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.gkv.newbie.R;
 import com.gkv.newbie.app.home.BaseNavigationActivity;
+import com.gkv.newbie.utils.Keyboard;
 import com.gkv.newbie.utils.internet.Server;
 import com.gkv.newbie.utils.locallists.HistoryManager;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class SearchUserActivity extends BaseNavigationActivity {
@@ -34,13 +38,18 @@ public class SearchUserActivity extends BaseNavigationActivity {
                 (this, android.R.layout.select_dialog_item, HistoryManager.getInstance().getHistoryList());
         autoTextView.setThreshold(1);
         autoTextView.setAdapter(adapter);
+
     }
 
     @OnClick(R.id.searchButton)
     public void searchUser(){
+
+        Keyboard.closeKeyboard(this);
+
         String email = textInputLayout.getEditText().getText().toString().trim().toLowerCase();
         if(email.length()==0){
-            Toast.makeText(this,"Email cant be empty",Toast.LENGTH_LONG).show();
+            //Toast.makeText(this,"Email cant be empty",Snackbar.LENGTH_LONG).show();
+            Snackbar.make(getRoot(),"Email can't be empty",Snackbar.LENGTH_LONG).show();
             return;
         }
         Intent i = new Intent(this,ViewUserActivity.class);

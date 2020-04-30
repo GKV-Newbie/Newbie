@@ -20,7 +20,9 @@ import com.gkv.newbie.model.Action;
 import com.gkv.newbie.model.Process;
 import com.gkv.newbie.model.Step;
 import com.gkv.newbie.modelmanager.ProcessHolder;
+import com.gkv.newbie.utils.Keyboard;
 import com.gkv.newbie.utils.gson.POJO;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class CreateActionActivity extends BaseNavigationActivity {
@@ -37,6 +39,8 @@ public class CreateActionActivity extends BaseNavigationActivity {
 
     Action action;
 
+    String _actionName;
+
     ArrayAdapter<String> arrayAdapter;
 
     int selection=-1;
@@ -51,6 +55,8 @@ public class CreateActionActivity extends BaseNavigationActivity {
         process = ProcessHolder.getInstance().getProcess();
         step = ProcessHolder.getInstance().getStep();
         action = ProcessHolder.getInstance().getAction();
+
+        _actionName = action.getName();
 
         init();
 
@@ -79,24 +85,29 @@ public class CreateActionActivity extends BaseNavigationActivity {
 
     @OnClick(R.id.saveButton)
     public void save(){
+        Keyboard.closeKeyboard(this);
         try {
             refreshAction();
 
             if(action.getName().length()==0){
-                Toast.makeText(this,"Name cant be empty",Toast.LENGTH_LONG).show();
+                Snackbar.make(getRoot(),"Name cant be empty",Snackbar.LENGTH_LONG).show();
                 return;
             }
 
             if(process.hasAction(action.getName())){
                 if(process.getActionByTitle(action.getName()).getStepTitle().equals(action.getStepTitle()) == false){
-                    Toast.makeText(this,"Action exists with that name",Toast.LENGTH_LONG).show();
+                    Snackbar.make(getRoot(),"Action exists with that name",Snackbar.LENGTH_LONG).show();
                     return;
                 }
             }
 
             if(process.hasStep(action.getStepTitle()) == false){
-                Toast.makeText(this,"Invalid Step",Toast.LENGTH_LONG).show();
+                Snackbar.make(getRoot(),"Invalid Step",Snackbar.LENGTH_LONG).show();
                 return;
+            }
+
+            if(process.hasAction(action.getName()) == false){
+                process.updateAction(_actionName,action);
             }
 
             process.putStepActionAssociation(step,action);

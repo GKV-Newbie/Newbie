@@ -36,7 +36,7 @@
         <com.gkv.newbie.ui.button.StylishButton
             android:id="@+id/createProcedureButton"
             android:layout_width="60dp"
-            android:drawableLeft="@drawable/text_file"
+            android:drawableLeft="@drawable/plus"
             style="@style/BlueButton"/>
 
     </LinearLayout>
